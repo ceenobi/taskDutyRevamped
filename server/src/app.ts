@@ -3,8 +3,8 @@ import express, { json, Request, Response, NextFunction } from "express"
 import createHttpError, { isHttpError } from "http-errors"
 import morgan from "morgan"
 import cors from "cors"
-import userRoutes from "./routes/user.routes"
-import taskRoutes from "./routes/task.routes"
+import userRoutes from "./routes/user.routes.js"
+import taskRoutes from "./routes/task.routes.js"
 
 config() //loads values from an env file
 const app = express()
@@ -12,7 +12,7 @@ const app = express()
 //middleware are functions that execute between a client request and a server response. They can be used to process, modifyor validate data.
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Only allow this domain
+    origin: ['http://localhost:5173'], // Only allow this domain
     methods: ['GET', 'POST', "PATCH", "DELETE"],      // Allow only specific HTTP methods
     credentials: true              // Allow cookies/authorization headers
 };

@@ -1,6 +1,6 @@
 import express from "express"
-import { createTask, getAllTasks, getUserTasks, getASingleTask, updateATask, deleteATask } from "src/controller/task.controller"
-import verifyToken from "src/middleware/verifyToken"
+import { createTask, getAllTasks, getUserTasks, getASingleTask, updateATask, deleteATask } from "../controller/task.controller.js"
+import verifyToken from "../middleware/verifyToken.js"
 
 const router = express.Router()
 

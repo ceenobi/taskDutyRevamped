@@ -1,4 +1,4 @@
-import Task from "../model/task.model"
+import Task from "../model/task.model.js"
 import createHttpError from "http-errors"
 import { Request, Response, NextFunction } from "express"
 
