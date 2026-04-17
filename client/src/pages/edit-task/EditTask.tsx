@@ -14,7 +14,7 @@ import SuspenseUi from "../../components/SuspenseUi";
 
 export default function EditTask() {
     const { taskId } = useParams()
-    const [singleTask, setSingleTask] = useState<TaskProps>(null)
+    const [singleTask, setSingleTask] = useState<TaskProps | null>(null)
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const { accessToken } = useAuth()
@@ -22,6 +22,10 @@ export default function EditTask() {
 
     //fetch the single task we need to update
     useEffect(() => {
+        if (!taskId) {
+            setError("Task id is missing")
+            return
+        }
         const getTask = async () => {
             setLoading(true)
             try {
@@ -69,6 +73,10 @@ export default function EditTask() {
 
     //api call to update the task
     const onFormSubmit: SubmitHandler<createTaskType> = async (data) => {
+        if (!taskId) {
+            setError("Task id is missing")
+            return
+        }
         try {
             const res = await updateTaskApi(taskId, data, accessToken)
             if (res.status === 200) {

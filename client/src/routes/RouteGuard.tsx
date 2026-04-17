@@ -4,7 +4,7 @@ import type { User } from "../context";
 
 type RouteGuardProps = {
     children: ReactNode;
-    user: User;
+    user: User | null;
 }
 
 export function PrivateRoutes({ children, user }: RouteGuardProps) {

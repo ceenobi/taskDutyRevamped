@@ -2,6 +2,7 @@ import { type ReactNode, useState, useEffect } from 'react'
 import { AuthProviderContext, type User } from '.'
 import { getAuthUserApi } from '../api/auth'
 import SuspenseUi from '../components/SuspenseUi'
+import axios from 'axios'
 
 type AuthProviderProps = {
     children: ReactNode
@@ -30,8 +31,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
                 if (res.status === 200) {
                     setUser(res.data.user)
                 }
-            } catch (error) {
-                console.log(error?.response?.data?.error)
+            } catch (error: unknown) {
+                const message =
+                    axios.isAxiosError(error) &&
+                        error.response?.data &&
+                        typeof (error.response.data as { error?: unknown }).error === "string"
+                        ? (error.response.data as { error: string }).error
+                        : "Failed to authenticate user";
+                console.log(message)
             } finally {
                 setAuthenticating(false)
             }
