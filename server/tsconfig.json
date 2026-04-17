@@ -14,7 +14,7 @@
       "isolatedModules": true,
       "noEmit": false,
       "baseUrl": ".",
-      "types": ["node"],
+      "types": ["node", "bcrypt"],
       "lib": ["ES2022"],
       "composite": true
     },
