@@ -12,7 +12,7 @@ const app = express()
 //middleware are functions that execute between a client request and a server response. They can be used to process, modifyor validate data.
 
 const corsOptions = {
-    origin: ['http://localhost:5173'], // Only allow this domain
+    origin: ['http://localhost:5173', 'https://task-duty-revamped.vercel.app'], // Only allow this domain
     methods: ['GET', 'POST', "PATCH", "DELETE"],      // Allow only specific HTTP methods
     credentials: true              // Allow cookies/authorization headers
 };
