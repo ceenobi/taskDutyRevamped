@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@theme {
+  --color-textPurple: #974fd0;
+  --color-textBlack: #292929;
+  --color-textGray: #737171;
+}
