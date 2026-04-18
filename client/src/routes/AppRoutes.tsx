@@ -8,6 +8,7 @@ import { PrivateRoutes, PublicRoutes } from "./RouteGuard";
 import { useAuth } from "../context";
 import SuspenseUi from "../components/SuspenseUi";
 import { lazy, Suspense } from "react"
+import NotFound from "../components/NotFound";
 
 //lazy load and code split requires a different import
 const AuthLayout = lazy(() => import("../layouts/AuthLayout"))
@@ -77,6 +78,10 @@ export default function AppRoutes() {
           element: <Register />
         }
       ]
+    },
+    {
+      path: "*",
+      element: <NotFound />
     }
   ]);
   return <RouterProvider router={router} />;

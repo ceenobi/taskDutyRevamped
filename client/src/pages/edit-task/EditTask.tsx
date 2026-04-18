@@ -22,6 +22,7 @@ export default function EditTask() {
 
     //fetch the single task we need to update
     useEffect(() => {
+        if (!accessToken) return
         if (!taskId) {
             setError("Task id is missing")
             return

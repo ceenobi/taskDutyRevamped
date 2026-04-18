@@ -16,6 +16,7 @@ export default function MyTasks() {
   const { accessToken } = useAuth()
 
   useEffect(() => {
+    if (!accessToken) return
     const getTasks = async () => {
       setLoading(true)
       try {
