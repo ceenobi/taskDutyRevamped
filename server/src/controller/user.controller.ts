@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express"
 import User from "../model/user.model.js"
+import generateToken from "../config/generateToken.js"
 import createHttpError from "http-errors"
 import bcrypt from "bcrypt"
-import generateToken from "../config/generateToken.js"
 
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     const { email, username, password } = req.body //req.body collects info via forms from the client
