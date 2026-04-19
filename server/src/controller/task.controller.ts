@@ -2,6 +2,11 @@ import Task from "../model/task.model.js"
 import createHttpError from "http-errors"
 import { Request, Response, NextFunction } from "express"
 
+/** Treats special regex characters as literal text in the user's search. */
+function escapeRegex(text: string): string {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
 export const createTask = async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.user.id
     const { title, tag, description } = req.body
@@ -30,6 +35,25 @@ export const getUserTasks = async (req: Request, res: Response, next: NextFuncti
         if (!tasks) {
             return next(createHttpError(404, "Tasks not found"))
         }
+        res.status(200).json(tasks)
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const searchUserTasks = async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user.id
+    const q = (req.query.q as string | undefined)?.trim()
+    try {
+        if (!q) {
+            return next(createHttpError(400, "Search query is required"))
+        }
+        const safe = escapeRegex(q)
+        const pattern = new RegExp(safe, "i")
+        const tasks = await Task.find({
+            userId,
+            $or: [{ title: pattern }, { description: pattern }],
+        }).lean()
         res.status(200).json(tasks)
     } catch (error) {
         next(error)

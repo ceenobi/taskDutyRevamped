@@ -17,6 +17,15 @@ export const getUserTaskApi = async (accessToken: string) => {
     })
 }
 
+export const searchTasksApi = async (accessToken: string, query: string) => {
+    return await axiosClient.get("/api/tasks/search", {
+        params: { q: query },
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    })
+}
+
 export const getSingleTaskApi = async (taskId: string, accessToken: string) => {
     return await axiosClient.get(`/api/tasks/get/${taskId}`, {
         headers: {
